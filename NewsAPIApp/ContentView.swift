@@ -40,18 +40,13 @@ struct ContentView : View {
                         }
                 
                 }.pickerStyle(SegmentedPickerStyle())
-            List(model.articles) { article in
-                
-                VStack(alignment: .leading) {
-                
-                Text(article.title)
-                    .lineLimit(nil)
-                
-                Text(article.description)
-                    .foregroundColor(.secondary)
-                    .lineLimit(nil)
-                }
+            Spacer()
+            if model.message != nil {
+                Text(model.message!)
+            } else {
+                ArticlesList(articles: model.articles)
             }
+            
         }
     }
 }
@@ -59,5 +54,28 @@ struct ContentView : View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct ArticlesList: View {
+    
+    var articlesList: [ArticleViewModel]
+
+    init(articles: [ArticleViewModel]) {
+        self.articlesList = articles
+    }
+    var body: some View {
+        List(self.articlesList) { article in
+            
+            VStack(alignment: .leading) {
+                
+                Text(article.title)
+                    .lineLimit(nil)
+                
+                Text(article.description)
+                    .foregroundColor(.secondary)
+                    .lineLimit(nil)
+            }
+        }
     }
 }

@@ -47,6 +47,11 @@ class ArticleListViewModel: ObservableObject {
             objectWillChange.send()
         }
     }
+    var message: String? = nil {
+        didSet {
+            objectWillChange.send()
+        }
+    }
     
     init() {
         refreshService()
@@ -83,9 +88,15 @@ class ArticleListViewModel: ObservableObject {
     }
     
     private func fetchNews(newsUrl: URL) {
-        Webservice().loadNewsFromUrl(url: newsUrl) { articles in
+        Webservice().loadNewsFromUrl(url: newsUrl) { message, articles in
+            
+            if let message = message {
+                self.message = message
+            }
+            
             if let articles = articles {
                 self.articles = articles.map(ArticleViewModel.init)
+                self.message = nil
             }
         }
     }

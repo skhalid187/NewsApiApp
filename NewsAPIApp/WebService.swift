@@ -10,22 +10,26 @@ import Foundation
 
 class Webservice {
     
-    func loadNewsFromUrl(url: URL, completion: @escaping ([Article]?) -> ()) {
+    func loadNewsFromUrl(url: URL, completion: @escaping (String?, [Article]?) -> ()) {
         
         URLSession.shared.dataTask(with: url) { data, response, error in
-                
+
             guard let data = data, error == nil else {
-                completion(nil)
+                completion(nil, nil)
                 return
             }
             
             let response = try? JSONDecoder().decode(NewsResponse.self, from: data)
             if let response = response {
                 DispatchQueue.main.async {
-                    completion(response.articles)
+                    if (response.status == "error") {
+                        completion(response.message, nil)
+                        return
+                    }
+
+                    completion(nil, response.articles)
                 }
             }
         }.resume()
-        
     }
 }

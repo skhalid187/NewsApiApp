@@ -9,7 +9,9 @@
 import Foundation
 
 struct NewsResponse: Codable {
-    let articles: [Article]
+    let status: String
+    let message: String?
+    let articles: [Article]?
 }
 
 struct Article: Codable {
