@@ -31,6 +31,10 @@ class ArticleViewModel: Identifiable, CustomStringConvertible {
     var description: String {
         return self.article.description ?? ""
     }
+    
+    var imageUrl: String {
+        return self.article.urlToImage ?? ""
+    }
 }
 
 class ArticleListViewModel: ObservableObject {
@@ -99,5 +103,27 @@ class ArticleListViewModel: ObservableObject {
                 self.message = nil
             }
         }
+    }
+}
+
+class RemoteImageUrl: ObservableObject {
+    let objectWillChange = PassthroughSubject<Void, Never>()
+    
+    var data = Data() {
+        didSet {
+            objectWillChange.send()
+        }
+    }
+    
+    init(imageURL: String) {
+        guard let url = URL(string: imageURL) else { return }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else { return }
+            
+            DispatchQueue.main.async {
+                self.data = data
+            }
+        }.resume()
     }
 }

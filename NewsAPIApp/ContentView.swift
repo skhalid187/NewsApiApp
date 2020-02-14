@@ -66,16 +66,33 @@ struct ArticlesList: View {
     }
     var body: some View {
         List(self.articlesList) { article in
-            
             VStack(alignment: .leading) {
-                
+                HStack {
+                    Spacer()
+                    ImageViewContainer(imageURL: article.imageUrl)
+                    Spacer()
+                }
                 Text(article.title)
                     .lineLimit(nil)
-                
                 Text(article.description)
                     .foregroundColor(.secondary)
                     .lineLimit(nil)
             }
         }
+    }
+}
+
+struct ImageViewContainer: View {
+    @ObservedObject var remoteImageURL: RemoteImageUrl
+    
+    init(imageURL: String) {
+        remoteImageURL = RemoteImageUrl(imageURL: imageURL)
+    }
+    
+    var body: some View {
+        Image( uiImage: (remoteImageURL.data.isEmpty) ? UIImage(imageLiteralResourceName: "swiftUi") : UIImage(data: remoteImageURL.data)!)
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .frame(width: 250, height: 150)
     }
 }
