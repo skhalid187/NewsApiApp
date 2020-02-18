@@ -11,9 +11,6 @@ import UIKit
 import SwiftUI
 import Combine
 
-// Get API Key from https://newsapi.org/
-let API_KEY = "API_KEY_GOES_HERE"
-
 class ArticleViewModel: Identifiable, CustomStringConvertible {
     
     let id = UUID()
@@ -39,6 +36,7 @@ class ArticleViewModel: Identifiable, CustomStringConvertible {
 
 class ArticleListViewModel: ObservableObject {
     
+    var apiKey: String?
     let objectWillChange = PassthroughSubject<Void, Never>()
     var currentSelectedValue = NewsCategory.Headlines.getIntValue() {
         didSet {
@@ -58,7 +56,10 @@ class ArticleListViewModel: ObservableObject {
     }
     
     init() {
-        refreshService()
+        if let config = Config.readConfig() {
+            self.apiKey = config.newsApiKey
+            refreshService()
+        }
     }
     
     func refreshService() {
@@ -76,7 +77,8 @@ class ArticleListViewModel: ObservableObject {
     
     
     func fetchTopHeadlines() {
-        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&apiKey=\(API_KEY)") else {
+        guard let apiKey = apiKey else { return }
+        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&apiKey=\(apiKey)") else {
             fatalError("URL is not correct!")
         }
 
@@ -84,7 +86,8 @@ class ArticleListViewModel: ObservableObject {
     }
     
     func fetchCategoryNews(_ category: NewsCategory) {
-        guard let url = URL(string: "https://newsapi.org/v2/everything?q=\(category.rawValue)&from=2020-01-11&sortBy=publishedAt&apiKey=\(API_KEY)") else {
+        guard let apiKey = apiKey else { return }
+        guard let url = URL(string: "https://newsapi.org/v2/everything?q=\(category.rawValue)&from=2020-01-11&sortBy=publishedAt&apiKey=\(apiKey)") else {
             fatalError("URL is not correct!")
         }
         
