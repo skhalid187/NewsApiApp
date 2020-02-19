@@ -22,21 +22,30 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDp-Nh-N8O">
-                                <rect key="frame" x="150" y="456" width="114" height="30"/>
+                                <rect key="frame" x="150" y="438" width="114" height="30"/>
                                 <state key="normal" title="Post Notification"/>
                                 <connections>
                                     <action selector="PostNotificationClicked:" destination="8bc-aE-JOD" eventType="touchUpInside" id="2W0-Mq-yPC"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98w-P7-PRH">
+                                <rect key="frame" x="111" y="568" width="192" height="30"/>
+                                <state key="normal" title="Move to Published Demo -&gt;"/>
+                                <connections>
+                                    <segue destination="lLi-KO-gyD" kind="show" id="86E-qs-QWR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="brq-4g-b6t" firstAttribute="centerY" secondItem="SHz-nj-rRz" secondAttribute="centerY" multiplier="0.5" id="85j-6e-hzT"/>
+                            <constraint firstItem="JDp-Nh-N8O" firstAttribute="centerX" secondItem="SHz-nj-rRz" secondAttribute="centerX" id="Hl4-km-nOo"/>
                             <constraint firstItem="brq-4g-b6t" firstAttribute="leading" secondItem="SHz-nj-rRz" secondAttribute="leading" constant="10" id="Hvv-3P-6Qy"/>
-                            <constraint firstItem="JDp-Nh-N8O" firstAttribute="top" secondItem="brq-4g-b6t" secondAttribute="bottom" constant="216" id="IcP-kJ-DyZ"/>
                             <constraint firstItem="SHz-nj-rRz" firstAttribute="trailing" secondItem="brq-4g-b6t" secondAttribute="trailing" constant="10" id="U6j-iB-liI"/>
+                            <constraint firstItem="JDp-Nh-N8O" firstAttribute="centerY" secondItem="SHz-nj-rRz" secondAttribute="centerY" id="erM-Ex-VVF"/>
+                            <constraint firstItem="98w-P7-PRH" firstAttribute="top" secondItem="JDp-Nh-N8O" secondAttribute="bottom" constant="100" id="hnj-tl-HMk"/>
+                            <constraint firstItem="98w-P7-PRH" firstAttribute="centerX" secondItem="JDp-Nh-N8O" secondAttribute="centerX" id="jjG-5A-kw0"/>
                             <constraint firstItem="brq-4g-b6t" firstAttribute="centerX" secondItem="SHz-nj-rRz" secondAttribute="centerX" id="kjE-0G-a0e"/>
-                            <constraint firstItem="JDp-Nh-N8O" firstAttribute="centerX" secondItem="brq-4g-b6t" secondAttribute="centerX" id="xq1-cg-XQd"/>
+                            <constraint firstItem="JDp-Nh-N8O" firstAttribute="top" secondItem="brq-4g-b6t" secondAttribute="bottom" constant="198" id="mVo-Y2-FRZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SHz-nj-rRz"/>
                     </view>
@@ -46,7 +55,45 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XPR-rj-YzC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="72" y="123"/>
+            <point key="canvasLocation" x="-1686" y="348"/>
+        </scene>
+        <!--Form View Controller-->
+        <scene sceneID="MWe-Sa-SlX">
+            <objects>
+                <viewController id="lLi-KO-gyD" customClass="FormViewController" customModule="NewsAPIApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J6U-IV-9ea">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9Pe-tX-icu">
+                                <rect key="frame" x="182.5" y="315" width="51" height="31"/>
+                                <connections>
+                                    <action selector="didSwitch:" destination="lLi-KO-gyD" eventType="valueChanged" id="bsZ-jy-DsA"/>
+                                </connections>
+                            </switch>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zii-Vt-w9N">
+                                <rect key="frame" x="182.5" y="389" width="49" height="30"/>
+                                <state key="normal" title="Submit"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Zii-Vt-w9N" firstAttribute="top" secondItem="9Pe-tX-icu" secondAttribute="bottom" constant="43" id="IDh-6r-qmz"/>
+                            <constraint firstItem="9Pe-tX-icu" firstAttribute="centerX" secondItem="Zii-Vt-w9N" secondAttribute="centerX" id="Nkc-CO-lEk"/>
+                            <constraint firstItem="Zii-Vt-w9N" firstAttribute="centerX" secondItem="D0Z-8W-mYd" secondAttribute="centerX" id="fUr-sA-van"/>
+                            <constraint firstItem="Zii-Vt-w9N" firstAttribute="centerY" secondItem="D0Z-8W-mYd" secondAttribute="centerY" id="v1K-pV-b8E"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="D0Z-8W-mYd"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="zAS-EK-KKE"/>
+                    <connections>
+                        <outlet property="acceptTermsSwitch" destination="9Pe-tX-icu" id="rQW-Q0-Efe"/>
+                        <outlet property="submitButton" destination="Zii-Vt-w9N" id="6Jk-wE-uVM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aHV-PB-9S2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-351" y="348"/>
         </scene>
     </scenes>
 </document>
