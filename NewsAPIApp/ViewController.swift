@@ -12,9 +12,9 @@ import Combine
 class CustomViewController: UIViewController {
 
     @IBOutlet var notificationLabel: UILabel!
-    
+
     var counter: Int = 0
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,10 +22,9 @@ class CustomViewController: UIViewController {
         blogPostPublisher.subscribe(lastPostLabelSubscriber)
     }
 
-    @IBAction func PostNotificationClicked(_ sender: Any) {
+    @IBAction func postNotificationClicked(_ sender: Any) {
         counter += 1
         let blogPost = BlogPost(title: "Counter: \(counter)", url: URL(string: "https://www.msn.com")!)
         NotificationCenter.default.post(name: .newBlogPost, object: blogPost)
     }
 }
-

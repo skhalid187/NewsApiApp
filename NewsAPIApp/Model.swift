@@ -22,7 +22,7 @@ struct Article: Codable {
 
 struct Config: Codable {
     let newsApiKey: String
-    
+
     static func readConfig() -> Config? {
         let path = Bundle.main.path(forResource: "config", ofType: "json")
 

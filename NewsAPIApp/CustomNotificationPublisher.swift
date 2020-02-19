@@ -22,4 +22,3 @@ let blogPostPublisher = NotificationCenter.Publisher(center: .default, name: .ne
                                                     .map { (notification) -> String? in
                                                             return (notification.object as? BlogPost)?.title ?? ""
                                                         }
-

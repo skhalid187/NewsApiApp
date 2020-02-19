@@ -15,12 +15,12 @@ final class FormViewController: UIViewController {
     private var switchSubscriber: AnyCancellable?
 
     @IBOutlet weak var acceptTermsSwitch: UISwitch!
-    
+
     @IBOutlet weak var submitButton: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         switchSubscriber = $isSubmitAllowed.receive(on: DispatchQueue.main).assign(to: \.isEnabled, on: submitButton)
 
     }

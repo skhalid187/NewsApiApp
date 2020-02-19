@@ -25,7 +25,7 @@
                                 <rect key="frame" x="150" y="438" width="114" height="30"/>
                                 <state key="normal" title="Post Notification"/>
                                 <connections>
-                                    <action selector="PostNotificationClicked:" destination="8bc-aE-JOD" eventType="touchUpInside" id="2W0-Mq-yPC"/>
+                                    <action selector="postNotificationClicked:" destination="8bc-aE-JOD" eventType="touchUpInside" id="z8w-wr-Nnw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98w-P7-PRH">

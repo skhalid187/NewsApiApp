@@ -9,36 +9,36 @@
 import SwiftUI
 
 enum NewsCategory: String {
-    case Headlines, Cricket, Football
-    
+    case headlines, cricket, football
+
     func getIntValue() -> Int {
         switch self {
-        case .Headlines:
+        case .headlines:
             return 0
-        case .Cricket:
+        case .cricket:
             return 1
-        case .Football:
+        case .football:
             return 2
         }
     }
 }
 
-struct ContentView : View {
-    
+struct ContentView: View {
+
     @ObservedObject var model = ArticleListViewModel()
     var newsCategories: [String] = [
-        NewsCategory.Headlines.rawValue,
-        NewsCategory.Cricket.rawValue,
-        NewsCategory.Football.rawValue      
+        NewsCategory.headlines.rawValue,
+        NewsCategory.cricket.rawValue,
+        NewsCategory.football.rawValue
     ]
-    
+
     var body: some View {
         VStack {
             Picker(selection: self.$model.currentSelectedValue, label: Text("Select news category?")) {
                         ForEach(0..<newsCategories.count) { index in
                             Text(self.newsCategories[index]).tag(index)
                         }
-                
+
                 }.pickerStyle(SegmentedPickerStyle())
             Spacer()
             if model.message != nil {
@@ -46,7 +46,7 @@ struct ContentView : View {
             } else {
                 ArticlesList(articles: model.articles)
             }
-            
+
         }
     }
 }
@@ -58,7 +58,7 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct ArticlesList: View {
-    
+
     var articlesList: [ArticleViewModel]
 
     init(articles: [ArticleViewModel]) {
@@ -84,11 +84,11 @@ struct ArticlesList: View {
 
 struct ImageViewContainer: View {
     @ObservedObject var remoteImageURL: RemoteImageUrl
-    
+
     init(imageURL: String) {
         remoteImageURL = RemoteImageUrl(imageURL: imageURL)
     }
-    
+
     var body: some View {
         Image( uiImage: (remoteImageURL.data.isEmpty) ? UIImage(imageLiteralResourceName: "swiftUi") : UIImage(data: remoteImageURL.data)!)
         .resizable()
