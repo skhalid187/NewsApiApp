@@ -34,8 +34,6 @@ struct ContentView : View {
         NewsCategory.Football
     ]
 
-    @State var someCategories: [String] = ["First", "Second", "Third"]
-
     var body: some View {
         VStack {
             Picker(selection: self.$model.currentSelectedValue, label: Text("Select news category?")) {
