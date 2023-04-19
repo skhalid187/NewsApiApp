@@ -11,9 +11,9 @@ import UIKit
 import SwiftUI
 import Combine
 
-class ArticleViewModel: Identifiable, CustomStringConvertible {
+class ArticleViewModel: CustomStringConvertible {
     
-    let id = UUID()
+//    let id = UUID()
 
     let article: Article
     
@@ -35,14 +35,15 @@ class ArticleViewModel: Identifiable, CustomStringConvertible {
 }
 
 class ArticleListViewModel: ObservableObject {
-    
-    var apiKey: String?
+
     let objectWillChange = PassthroughSubject<Void, Never>()
     var currentSelectedValue = NewsCategory.Headlines.getIntValue() {
         didSet {
             refreshService()
         }
     }
+
+    private var apiKey: String?
     
     var articles = [ArticleViewModel]() {
         didSet {
@@ -62,7 +63,7 @@ class ArticleListViewModel: ObservableObject {
         }
     }
     
-    func refreshService() {
+    private func refreshService() {
         switch currentSelectedValue {
         case NewsCategory.Headlines.getIntValue():
             fetchTopHeadlines()
@@ -76,7 +77,7 @@ class ArticleListViewModel: ObservableObject {
     }
     
     
-    func fetchTopHeadlines() {
+    private func fetchTopHeadlines() {
         guard let apiKey = apiKey else { return }
         guard let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&apiKey=\(apiKey)") else {
             fatalError("URL is not correct!")
@@ -85,7 +86,7 @@ class ArticleListViewModel: ObservableObject {
         fetchNews(newsUrl: url)
     }
     
-    func fetchCategoryNews(_ category: NewsCategory) {
+    private func fetchCategoryNews(_ category: NewsCategory) {
         guard let apiKey = apiKey else { return }
         guard let url = URL(string: "https://newsapi.org/v2/everything?q=\(category.rawValue)&from=2020-01-11&sortBy=publishedAt&apiKey=\(apiKey)") else {
             fatalError("URL is not correct!")
@@ -102,7 +103,7 @@ class ArticleListViewModel: ObservableObject {
             }
             
             if let articles = articles {
-                self.articles = articles.map(ArticleViewModel.init)
+                self.articles = articles.map(ArticleViewModel.init) // ----- find out about this line.
                 self.message = nil
             }
         }

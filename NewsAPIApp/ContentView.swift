@@ -9,6 +9,7 @@
 import SwiftUI
 
 enum NewsCategory: String {
+
     case Headlines, Cricket, Football
     
     func getIntValue() -> Int {
@@ -26,19 +27,24 @@ enum NewsCategory: String {
 struct ContentView : View {
     
     @ObservedObject var model = ArticleListViewModel()
-    var newsCategories: [String] = [
-        NewsCategory.Headlines.rawValue,
-        NewsCategory.Cricket.rawValue,
-        NewsCategory.Football.rawValue      
+
+    @State var newsCategories: [NewsCategory] = [
+        NewsCategory.Headlines,
+        NewsCategory.Cricket,
+        NewsCategory.Football
     ]
-    
+
+    @State var someCategories: [String] = ["First", "Second", "Third"]
+
     var body: some View {
         VStack {
             Picker(selection: self.$model.currentSelectedValue, label: Text("Select news category?")) {
-                        ForEach(0..<newsCategories.count) { index in
-                            Text(self.newsCategories[index]).tag(index)
-                        }
-                
+
+                ForEach(newsCategories, id: \.self) { item in
+
+                    Text(item.rawValue).tag(item.getIntValue())
+                }
+
                 }.pickerStyle(SegmentedPickerStyle())
             Spacer()
             if model.message != nil {
@@ -65,7 +71,7 @@ struct ArticlesList: View {
         self.articlesList = articles
     }
     var body: some View {
-        List(self.articlesList) { article in
+        List(self.articlesList, id: \ArticleViewModel.title) { article in
             VStack(alignment: .leading) {
                 HStack {
                     Spacer()

@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct NewsResponse: Codable {
+struct NewsResponse<T: Codable>: Codable {
     let status: String
     let message: String?
-    let articles: [Article]?
+    let articles: [T]?
 }
 
 struct Article: Codable {

@@ -19,7 +19,7 @@ class Webservice {
                 return
             }
             
-            let response = try? JSONDecoder().decode(NewsResponse.self, from: data)
+            let response = try? JSONDecoder().decode(NewsResponse<Article>.self, from: data)
             if let response = response {
                 DispatchQueue.main.async {
                     if (response.status == "error") {
